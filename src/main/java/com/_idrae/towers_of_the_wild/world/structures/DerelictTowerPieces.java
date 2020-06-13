@@ -18,33 +18,29 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraft.world.gen.feature.structure.IglooPieces;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
-import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.storage.loot.LootTables;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class TowerPieces {
+public class DerelictTowerPieces {
 
-    private static final ResourceLocation TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
-    private static final ResourceLocation TOWER_BOTTOM = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_bottom");
+    private static final ResourceLocation DERELICT_TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_top");
+    private static final ResourceLocation DERELICT_TOWER_BOTTOM = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_bottom");
 
     private static final ResourceLocation TOWER_CHEST = new ResourceLocation(TowersOfTheWild.MOD_ID, "chests/tower_chest");
-    private static final Map<ResourceLocation, BlockPos> CENTER_TOP_OFFSETS = ImmutableMap.of(TOWER_TOP, new BlockPos(6, 28, 6), TOWER_BOTTOM, new BlockPos(3, 31, 3));
-    private static final Map<ResourceLocation, BlockPos> CORNER_RELATIVE_POSITIONS = ImmutableMap.of(TOWER_TOP, new BlockPos(-3, 31, -3), TOWER_BOTTOM, BlockPos.ZERO);
+    private static final Map<ResourceLocation, BlockPos> CENTER_TOP_OFFSETS = ImmutableMap.of(DERELICT_TOWER_TOP, new BlockPos(6, 28, 6), DERELICT_TOWER_BOTTOM, new BlockPos(3, 31, 3));
+    private static final Map<ResourceLocation, BlockPos> CORNER_RELATIVE_POSITIONS = ImmutableMap.of(DERELICT_TOWER_TOP, new BlockPos(-3, 31, -3), DERELICT_TOWER_BOTTOM, BlockPos.ZERO);
 
 
     public static void addPieces(TemplateManager templateManager, BlockPos absolutePos, Rotation rotation, List<StructurePiece> pieces, Random random, NoFeatureConfig config) {
-        pieces.add(new Piece(templateManager, TOWER_BOTTOM, absolutePos, rotation));
-        pieces.add(new Piece(templateManager, TOWER_TOP, absolutePos, rotation));
+        pieces.add(new TowerPieces.Piece(templateManager, DERELICT_TOWER_BOTTOM, absolutePos, rotation));
+        pieces.add(new TowerPieces.Piece(templateManager, DERELICT_TOWER_TOP, absolutePos, rotation));
     }
 
     public static class Piece extends TemplateStructurePiece {
@@ -111,7 +107,7 @@ public class TowerPieces {
             PlacementSettings placementsettings = (new PlacementSettings().setRotation(Rotation.NONE).setMirror(Mirror.NONE).setCenterOffset(CENTER_TOP_OFFSETS.get(this.structurePart)));
             BlockPos relativePos = CORNER_RELATIVE_POSITIONS.get(this.structurePart);
 
-            if (this.structurePart.equals(TOWER_BOTTOM)) {
+            if (this.structurePart.equals(DERELICT_TOWER_BOTTOM)) {
                 BlockPos blockpos1 = this.templatePosition;
                 // BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(- relativePos.getX(), 0, - relativePos.getZ())));*
 
@@ -139,7 +135,7 @@ public class TowerPieces {
                 }
                 this.templatePosition = this.templatePosition.add(0, minHeight - 90, 0);
 
-            } else if (this.structurePart.equals(TOWER_TOP)) {
+            } else if (this.structurePart.equals(DERELICT_TOWER_TOP)) {
                 BlockPos blockpos1 = this.templatePosition;
                 // BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(- relativePos.getX(), 0, - relativePos.getZ())));
                 int height;
@@ -157,4 +153,6 @@ public class TowerPieces {
             return super.create(worldIn, chunkGeneratorIn, randomIn, mutableBoundingBoxIn, chunkPosIn);
         }
     }
+
+
 }
