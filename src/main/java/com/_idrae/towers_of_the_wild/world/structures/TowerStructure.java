@@ -120,16 +120,27 @@ public class TowerStructure extends ScatteredStructure<NoFeatureConfig> {
             NoFeatureConfig nofeatureconfig = (NoFeatureConfig)generator.getStructureConfig(biomeIn, RegistryHandler.TOWER.get());
             int i = chunkX * 16;
             int j = chunkZ * 16;
-            BlockPos blockpos = new BlockPos(i + 5, 90, j + 5);
-            Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
+            BlockPos blockpos = new BlockPos(i + 3, 90, j + 3);
+            // Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
+            Rotation rotation = Rotation.NONE;
 
             if (biomeIn.getCategory() == Biome.Category.JUNGLE) {
                 JungleTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
             } else if (biomeIn.getCategory() == Biome.Category.ICY) {
+                // blockpos.add(-2, 0, -2);
                 IceTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
             } else {
-                if (this.rand.nextInt(11) <= 2) {
-                    DerelictTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+                if (this.rand.nextInt(11) <= 10) {
+                    // blockpos.add(-2, 0, -2);
+                    blockpos = new BlockPos(i, 90, j);
+                    if (biomeIn.getCategory() == Biome.Category.PLAINS
+                            || biomeIn.getCategory() == Biome.Category.FOREST
+                            || biomeIn.getCategory() == Biome.Category.TAIGA
+                            || biomeIn.getCategory() == Biome.Category.SAVANNA) {
+                        DerelictTowerGrassPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+                    } else {
+                        DerelictTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+                    }
                 } else {
                     TowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
                 }

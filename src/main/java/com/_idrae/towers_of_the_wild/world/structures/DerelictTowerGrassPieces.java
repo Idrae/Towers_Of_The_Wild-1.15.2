@@ -28,9 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class DerelictTowerPieces {
-
-    private static final ResourceLocation DERELICT_TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_top");
+public class DerelictTowerGrassPieces {
+    private static final ResourceLocation DERELICT_TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_top_grass");
     private static final ResourceLocation DERELICT_TOWER_BOTTOM = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_bottom");
 
     private static final ResourceLocation TOWER_CHEST = new ResourceLocation(TowersOfTheWild.MOD_ID, "chests/tower_chest");
@@ -39,8 +38,8 @@ public class DerelictTowerPieces {
 
 
     public static void addPieces(TemplateManager templateManager, BlockPos absolutePos, Rotation rotation, List<StructurePiece> pieces, Random random, NoFeatureConfig config) {
-        pieces.add(new DerelictTowerPieces.Piece(templateManager, DERELICT_TOWER_BOTTOM, absolutePos, rotation));
-        pieces.add(new DerelictTowerPieces.Piece(templateManager, DERELICT_TOWER_TOP, absolutePos, rotation));
+        pieces.add(new DerelictTowerGrassPieces.Piece(templateManager, DERELICT_TOWER_BOTTOM, absolutePos, rotation));
+        pieces.add(new DerelictTowerGrassPieces.Piece(templateManager, DERELICT_TOWER_TOP, absolutePos, rotation));
     }
 
     public static class Piece extends TemplateStructurePiece {
@@ -48,7 +47,7 @@ public class DerelictTowerPieces {
         private final Rotation rotation;
 
         public Piece(TemplateManager templateManager, ResourceLocation structurePart, BlockPos absolutePos, Rotation rotation) {
-            super(RegistryHandler.DERELICT_TOWER_PIECE, 0);
+            super(RegistryHandler.DERELICT_TOWER_GRASS_PIECE, 0);
             this.structurePart = structurePart;
             BlockPos relativePos = CORNER_RELATIVE_POSITIONS.get(structurePart);
             this.templatePosition = absolutePos.add(relativePos.getX(), relativePos.getY(), relativePos.getZ());
@@ -57,7 +56,7 @@ public class DerelictTowerPieces {
         }
 
         public Piece(TemplateManager p_i50566_1_, CompoundNBT p_i50566_2_) {
-            super(RegistryHandler.DERELICT_TOWER_PIECE, p_i50566_2_);
+            super(RegistryHandler.DERELICT_TOWER_GRASS_PIECE, p_i50566_2_);
             this.structurePart = new ResourceLocation(p_i50566_2_.getString("Template"));
             this.rotation = Rotation.valueOf(p_i50566_2_.getString("Rot"));
             this.func_207614_a(p_i50566_1_);
@@ -148,9 +147,21 @@ public class DerelictTowerPieces {
                         }
                     }
                 }
+
+                // replacing dirt blocks beneath tower by grass
+                for (int i=0; i<11; ++i) {
+                    for (int j=0; j<11; ++j) {
+                        BlockPos grassPos = new BlockPos(blockpos1.getX() + i, minHeight -1, blockpos1.getZ() + j);
+                        BlockState blockstate = worldIn.getBlockState(grassPos);
+                        if (blockstate.getBlock() == Blocks.DIRT) {
+                            worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
+                        }
+                    }
+                }
                 this.templatePosition = this.templatePosition.add(0, minHeight - 90, 0);
             }
             return super.create(worldIn, chunkGeneratorIn, randomIn, mutableBoundingBoxIn, chunkPosIn);
         }
     }
+
 }

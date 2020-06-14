@@ -34,13 +34,13 @@ public class IceTowerPieces {
     private static final ResourceLocation TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
 
     private static final ResourceLocation TOWER_CHEST = new ResourceLocation(TowersOfTheWild.MOD_ID, "chests/tower_chest");
-    private static final Map<ResourceLocation, BlockPos> CENTER_TOP_OFFSETS = ImmutableMap.of(TOWER_TOP, new BlockPos(6, 28, 6), ICE_TOWER_BOTTOM, new BlockPos(3, 31, 3));
-    private static final Map<ResourceLocation, BlockPos> CORNER_RELATIVE_POSITIONS = ImmutableMap.of(TOWER_TOP, new BlockPos(-3, 31, -3), ICE_TOWER_BOTTOM, BlockPos.ZERO);
+    private static final Map<ResourceLocation, BlockPos> CENTER_TOP_OFFSETS = ImmutableMap.of(TOWER_TOP, new BlockPos(6, 28, 6), ICE_TOWER_BOTTOM, new BlockPos(5, 31, 5));
+    private static final Map<ResourceLocation, BlockPos> CORNER_RELATIVE_POSITIONS = ImmutableMap.of(TOWER_TOP, new BlockPos(-1, 31, -1), ICE_TOWER_BOTTOM, BlockPos.ZERO);
 
 
     public static void addPieces(TemplateManager templateManager, BlockPos absolutePos, Rotation rotation, List<StructurePiece> pieces, Random random, NoFeatureConfig config) {
-        pieces.add(new TowerPieces.Piece(templateManager, ICE_TOWER_BOTTOM, absolutePos, rotation));
-        pieces.add(new TowerPieces.Piece(templateManager, TOWER_TOP, absolutePos, rotation));
+        pieces.add(new IceTowerPieces.Piece(templateManager, ICE_TOWER_BOTTOM, absolutePos, rotation));
+        pieces.add(new IceTowerPieces.Piece(templateManager, TOWER_TOP, absolutePos, rotation));
     }
 
     public static class Piece extends TemplateStructurePiece {
@@ -48,7 +48,7 @@ public class IceTowerPieces {
         private final Rotation rotation;
 
         public Piece(TemplateManager templateManager, ResourceLocation structurePart, BlockPos absolutePos, Rotation rotation) {
-            super(RegistryHandler.TOWER_PIECE, 0);
+            super(RegistryHandler.ICE_TOWER_PIECE, 0);
             this.structurePart = structurePart;
             BlockPos relativePos = CORNER_RELATIVE_POSITIONS.get(structurePart);
             this.templatePosition = absolutePos.add(relativePos.getX(), relativePos.getY(), relativePos.getZ());
@@ -57,7 +57,7 @@ public class IceTowerPieces {
         }
 
         public Piece(TemplateManager p_i50566_1_, CompoundNBT p_i50566_2_) {
-            super(RegistryHandler.TOWER_PIECE, p_i50566_2_);
+            super(RegistryHandler.ICE_TOWER_PIECE, p_i50566_2_);
             this.structurePart = new ResourceLocation(p_i50566_2_.getString("Template"));
             this.rotation = Rotation.valueOf(p_i50566_2_.getString("Rot"));
             this.func_207614_a(p_i50566_1_);
@@ -114,8 +114,8 @@ public class IceTowerPieces {
                 // setting spawn height
                 int height;
                 int minHeight = Integer.MAX_VALUE;
-                for (int i=1; i<6; ++i) {
-                    for (int j=1; j<6; ++j) {
+                for (int i=1; i<8; ++i) {
+                    for (int j=1; j<8; ++j) {
                         height = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX() + i, blockpos1.getZ() + j);
                         if (height < minHeight) {
                             minHeight = height;
@@ -124,8 +124,8 @@ public class IceTowerPieces {
                 }
 
                 // replacing dirt blocks beneath tower by grass
-                for (int i=0; i<7; ++i) {
-                    for (int j=0; j<7; ++j) {
+                for (int i=0; i<9; ++i) {
+                    for (int j=0; j<9; ++j) {
                         BlockPos grassPos = new BlockPos(blockpos1.getX() + i, minHeight -1, blockpos1.getZ() + j);
                         BlockState blockstate = worldIn.getBlockState(grassPos);
                         if (blockstate.getBlock() == Blocks.DIRT) {
@@ -140,9 +140,9 @@ public class IceTowerPieces {
                 // BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(- relativePos.getX(), 0, - relativePos.getZ())));
                 int height;
                 int minHeight = Integer.MAX_VALUE;
-                for (int i=1; i<6; ++i) {
-                    for (int j=1; j<6; ++j) {
-                        height = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX() + 3 + i, blockpos1.getZ() + 3 + j);
+                for (int i=1; i<8; ++i) {
+                    for (int j=1; j<8; ++j) {
+                        height = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX() + 1 + i, blockpos1.getZ() + 1 + j);
                         if (height < minHeight) {
                             minHeight = height;
                         }
