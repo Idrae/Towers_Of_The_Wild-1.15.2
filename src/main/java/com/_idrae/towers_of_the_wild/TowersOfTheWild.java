@@ -28,8 +28,6 @@ public class TowersOfTheWild {
         RegistryHandler.FEATURES.register(modEventBus);
         modEventBus.addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
-
-
     }
 
     private void setup(final FMLCommonSetupEvent event) {

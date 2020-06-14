@@ -2,6 +2,7 @@ package com._idrae.towers_of_the_wild.config;
 
 import com._idrae.towers_of_the_wild.TowersOfTheWild;
 import com.google.common.collect.Lists;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -86,30 +87,4 @@ public class TowersOfTheWildConfig {
             builder.pop();
         }
     }
-
-    /*
-
-    public static class ClientConfig {
-
-        public final ForgeConfigSpec.BooleanValue aBoolean;
-        public final ForgeConfigSpec.IntValue towerFrequency;
-
-        public ClientConfig(ForgeConfigSpec.Builder builder) {
-            aBoolean = builder
-                    .comment("aBoolean usage description")
-                    .translation(TowersOfTheWild.MOD_ID + ".config." + "aBoolean")
-                    .define("aBoolean", false);
-
-            builder.push("category");
-            towerFrequency = builder
-                    .comment("Spawn rate of the towers")
-                    .translation(TowersOfTheWild.MOD_ID + ".config." + "towerFrequency")
-                    .defineInRange("towerFrequency", 30, 0, 100);
-
-            builder.pop();
-        }
-    }
-
-     */
-
 }

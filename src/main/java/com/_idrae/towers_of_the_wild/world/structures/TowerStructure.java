@@ -11,6 +11,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -41,7 +42,6 @@ public class TowerStructure extends ScatteredStructure<NoFeatureConfig> {
     @Override
     protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, int offsetX, int offsetZ) {
         FEATURE_DISTANCE = TowersOfTheWildConfig.rarity;
-
         int chunkPosX = chunkX + FEATURE_DISTANCE * offsetX;
         int chunkPosZ = chunkZ + FEATURE_DISTANCE * offsetZ;
         int chunkPosX1 = chunkPosX < 0 ? chunkPosX - FEATURE_DISTANCE + 1 : chunkPosX;
@@ -122,8 +122,18 @@ public class TowerStructure extends ScatteredStructure<NoFeatureConfig> {
             int j = chunkZ * 16;
             BlockPos blockpos = new BlockPos(i + 5, 90, j + 5);
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            TowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
 
+            if (biomeIn.getCategory() == Biome.Category.JUNGLE) {
+                JungleTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+            } else if (biomeIn.getCategory() == Biome.Category.ICY) {
+                IceTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+            } else {
+                if (this.rand.nextInt(11) <= 2) {
+                    DerelictTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+                } else {
+                    TowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
+                }
+            }
             this.recalculateStructureSize();
         }
     }
