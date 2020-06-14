@@ -130,13 +130,14 @@ public class TowerStructure extends ScatteredStructure<NoFeatureConfig> {
                 // blockpos.add(-2, 0, -2);
                 IceTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
             } else {
-                if (this.rand.nextInt(11) <= 10) {
+                if (this.rand.nextInt(21) <= 2) {
                     // blockpos.add(-2, 0, -2);
                     blockpos = new BlockPos(i, 90, j);
                     if (biomeIn.getCategory() == Biome.Category.PLAINS
                             || biomeIn.getCategory() == Biome.Category.FOREST
                             || biomeIn.getCategory() == Biome.Category.TAIGA
-                            || biomeIn.getCategory() == Biome.Category.SAVANNA) {
+                            || biomeIn.getCategory() == Biome.Category.SAVANNA
+                            || biomeIn.getCategory() == Biome.Category.EXTREME_HILLS) {
                         DerelictTowerGrassPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
                     } else {
                         DerelictTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
