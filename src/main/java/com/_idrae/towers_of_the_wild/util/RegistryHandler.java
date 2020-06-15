@@ -29,7 +29,7 @@ public class RegistryHandler {
     public static final IStructurePieceType JUNGLE_TOWER_PIECE = registerPiece("jungle_tower", JungleTowerPieces.Piece::new);
     public static final IStructurePieceType ICE_TOWER_PIECE = registerPiece("ice_tower", IceTowerPieces.Piece::new);
     public static final IStructurePieceType DERELICT_TOWER_PIECE = registerPiece("derelict_tower", DerelictTowerPieces.Piece::new);
-    public static final IStructurePieceType DERELICT_TOWER_GRASS_PIECE = registerPiece("derelict_tower", DerelictTowerGrassPieces.Piece::new);
+    public static final IStructurePieceType DERELICT_TOWER_GRASS_PIECE = registerPiece("derelict_tower_grass", DerelictTowerGrassPieces.Piece::new);
 
     private static IStructurePieceType registerPiece(String key, IStructurePieceType type) {
         TowersOfTheWild.LOGGER.info(key + " structure piece registered");

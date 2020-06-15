@@ -130,6 +130,11 @@ public class IceTowerPieces {
                         BlockState blockstate = worldIn.getBlockState(grassPos);
                         if (blockstate.getBlock() == Blocks.DIRT) {
                             worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
+                            // setting snow
+                        }
+                        BlockPos snowPos = grassPos.add(0, 1, 0);
+                        if (worldIn.getBlockState(snowPos).getBlock() == Blocks.AIR) {
+                            worldIn.setBlockState(snowPos, Blocks.SNOW.getDefaultState(), 3);
                         }
                     }
                 }
