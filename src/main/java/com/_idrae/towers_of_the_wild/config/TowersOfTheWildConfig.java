@@ -3,6 +3,7 @@ package com._idrae.towers_of_the_wild.config;
 import com._idrae.towers_of_the_wild.TowersOfTheWild;
 import com.google.common.collect.Lists;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraftforge.common.ForgeConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +20,7 @@ public class TowersOfTheWildConfig {
 
     public static int rarity;
     public static List<String> biomeBlackList;
+    public static int derelictTowerProportion;
 
     static {
         final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(TowersOfTheWildConfig.CommonConfig::new);
@@ -37,13 +39,14 @@ public class TowersOfTheWildConfig {
     public static void bakeConfig() {
         rarity = COMMON.towerRarity.get();
         biomeBlackList = COMMON.biomeBlackList.get();
-        TowersOfTheWild.LOGGER.info(rarity);
+        derelictTowerProportion = COMMON.derelictTowerProportion.get();
     }
 
     public static class CommonConfig {
 
         public final ForgeConfigSpec.IntValue towerRarity;
         public final ForgeConfigSpec.ConfigValue<List<String>> biomeBlackList;
+        public final ForgeConfigSpec.IntValue derelictTowerProportion;
 
         public CommonConfig(ForgeConfigSpec.Builder builder) {
             builder.push("towers");
@@ -83,6 +86,10 @@ public class TowersOfTheWildConfig {
                                 "biomesoplenty:undergarden",
                                 "biomesoplenty:visceral_heap"
                     ));
+
+            derelictTowerProportion = builder
+                    .comment("The proportion of towers that will be derelict (in %). Default: 15")
+                    .defineInRange("derelictTowerProportion", 15, 0, 100);
 
             builder.pop();
         }

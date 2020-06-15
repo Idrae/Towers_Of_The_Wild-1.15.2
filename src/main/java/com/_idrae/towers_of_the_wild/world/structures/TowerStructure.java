@@ -130,7 +130,7 @@ public class TowerStructure extends ScatteredStructure<NoFeatureConfig> {
                 // blockpos.add(-2, 0, -2);
                 IceTowerPieces.addPieces(templateManagerIn, blockpos, rotation, this.components, this.rand, nofeatureconfig);
             } else {
-                if (this.rand.nextInt(21) <= 2) {
+                if (this.rand.nextInt(100) < TowersOfTheWildConfig.derelictTowerProportion) {
                     // blockpos.add(-2, 0, -2);
                     blockpos = new BlockPos(i, 90, j);
                     if (biomeIn.getCategory() == Biome.Category.PLAINS
