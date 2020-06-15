@@ -132,10 +132,19 @@ public class IceTowerPieces {
                             worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
                             // setting snow
                         }
+
+                        if (!((i == 0 ||  i == 8) && (j == 0 || j == 8))) {
+                            if (blockstate.getBlock() == Blocks.WATER) {
+                                worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
+                            }
+                        }
+
                         BlockPos snowPos = grassPos.add(0, 1, 0);
                         if (worldIn.getBlockState(snowPos).getBlock() == Blocks.AIR) {
                             worldIn.setBlockState(snowPos, Blocks.SNOW.getDefaultState(), 3);
                         }
+
+
                     }
                 }
                 this.templatePosition = this.templatePosition.add(0, minHeight - 90, 0);

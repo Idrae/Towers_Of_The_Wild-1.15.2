@@ -123,13 +123,19 @@ public class JungleTowerPieces {
                     }
                 }
 
-                // replacing dirt blocks beneath tower by grass
+                // replacing dirt or water blocks beneath tower by grass
                 for (int i=0; i<9; ++i) {
                     for (int j=0; j<9; ++j) {
                         BlockPos grassPos = new BlockPos(blockpos1.getX() + i, minHeight -1, blockpos1.getZ() + j);
                         BlockState blockstate = worldIn.getBlockState(grassPos);
                         if (blockstate.getBlock() == Blocks.DIRT) {
                             worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
+                        }
+
+                        if (!((i == 0 ||  i == 8) && (j == 0 || j == 8))) {
+                            if (blockstate.getBlock() == Blocks.WATER) {
+                                worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
+                            }
                         }
                     }
                 }

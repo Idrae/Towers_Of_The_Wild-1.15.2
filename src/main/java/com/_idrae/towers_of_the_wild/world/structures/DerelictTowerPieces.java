@@ -114,8 +114,8 @@ public class DerelictTowerPieces {
                 // setting spawn height
                 int height;
                 int minHeight = Integer.MAX_VALUE;
-                for (int i=1; i<6; ++i) {
-                    for (int j=1; j<6; ++j) {
+                for (int i=0; i<5; ++i) {
+                    for (int j=0; j<5; ++j) {
                         height = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX() + i, blockpos1.getZ() + j);
                         if (height < minHeight) {
                             minHeight = height;
@@ -123,16 +123,26 @@ public class DerelictTowerPieces {
                     }
                 }
 
-                // replacing dirt blocks beneath tower by grass
-                for (int i=0; i<7; ++i) {
-                    for (int j=0; j<7; ++j) {
+                // replacing dirt and water blocks beneath tower by grass
+                for (int i=-1; i<6; ++i) {
+                    for (int j=-1; j<6; ++j) {
                         BlockPos grassPos = new BlockPos(blockpos1.getX() + i, minHeight -1, blockpos1.getZ() + j);
                         BlockState blockstate = worldIn.getBlockState(grassPos);
                         if (blockstate.getBlock() == Blocks.DIRT) {
                             worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
                         }
+
+                        if (!((i == -1 ||  i == 5) && (j == -1 || j == 5))) {
+                            if (blockstate.getBlock() == Blocks.WATER) {
+                                worldIn.setBlockState(grassPos, Blocks.GRASS_BLOCK.getDefaultState(), 3);
+                            }
+                        }
                     }
+
+
                 }
+
+
                 this.templatePosition = this.templatePosition.add(0, minHeight - 90, 0);
 
             } else if (this.structurePart.equals(DERELICT_TOWER_TOP)) {
@@ -140,8 +150,8 @@ public class DerelictTowerPieces {
                 // BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(- relativePos.getX(), 0, - relativePos.getZ())));
                 int height;
                 int minHeight = Integer.MAX_VALUE;
-                for (int i=1; i<6; ++i) {
-                    for (int j=1; j<6; ++j) {
+                for (int i=0; i<5; ++i) {
+                    for (int j=0; j<5; ++j) {
                         height = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX() + 2 + i, blockpos1.getZ() + 2 + j);
                         if (height < minHeight) {
                             minHeight = height;
