@@ -17,6 +17,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraftforge.fml.ModList;
 
 import java.util.Random;
 import java.util.function.Function;

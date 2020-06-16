@@ -27,6 +27,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTables;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 import java.util.Map;
@@ -34,9 +35,10 @@ import java.util.Random;
 
 public class TowerPieces {
 
-    private static final ResourceLocation TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
+    // private static final ResourceLocation TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
+    private static final ResourceLocation TOWER_TOP = ModList.get().isLoaded("waystones") ? new ResourceLocation(TowersOfTheWild.MOD_ID, "waystone_tower_top") : new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
     private static final ResourceLocation TOWER_BOTTOM = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_bottom");
-
+    
     private static final ResourceLocation TOWER_CHEST = new ResourceLocation(TowersOfTheWild.MOD_ID, "chests/tower_chest");
     private static final Map<ResourceLocation, BlockPos> CENTER_TOP_OFFSETS = ImmutableMap.of(TOWER_TOP, new BlockPos(6, 28, 6), TOWER_BOTTOM, new BlockPos(3, 31, 3));
     private static final Map<ResourceLocation, BlockPos> CORNER_RELATIVE_POSITIONS = ImmutableMap.of(TOWER_TOP, new BlockPos(-3, 31, -3), TOWER_BOTTOM, BlockPos.ZERO);
@@ -45,6 +47,7 @@ public class TowerPieces {
     public static void addPieces(TemplateManager templateManager, BlockPos absolutePos, Rotation rotation, List<StructurePiece> pieces, Random random, NoFeatureConfig config) {
         pieces.add(new Piece(templateManager, TOWER_BOTTOM, absolutePos, rotation));
         pieces.add(new Piece(templateManager, TOWER_TOP, absolutePos, rotation));
+
     }
 
     public static class Piece extends TemplateStructurePiece {
