@@ -19,8 +19,10 @@ public class TowersOfTheWildConfig {
     public static final ForgeConfigSpec COMMON_SPEC;
 
     public static int rarity;
+    public static List<String> allModBiomesBlackList;
     public static List<String> biomeBlackList;
     public static int derelictTowerProportion;
+
 
     static {
         final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(TowersOfTheWildConfig.CommonConfig::new);
@@ -38,6 +40,7 @@ public class TowersOfTheWildConfig {
 
     public static void bakeConfig() {
         rarity = COMMON.towerRarity.get();
+        allModBiomesBlackList = COMMON.allModBiomesBlackList.get();
         biomeBlackList = COMMON.biomeBlackList.get();
         derelictTowerProportion = COMMON.derelictTowerProportion.get();
     }
@@ -45,6 +48,7 @@ public class TowersOfTheWildConfig {
     public static class CommonConfig {
 
         public final ForgeConfigSpec.IntValue towerRarity;
+        public final ForgeConfigSpec.ConfigValue<List<String>> allModBiomesBlackList;
         public final ForgeConfigSpec.ConfigValue<List<String>> biomeBlackList;
         public final ForgeConfigSpec.IntValue derelictTowerProportion;
 
@@ -54,8 +58,15 @@ public class TowersOfTheWildConfig {
                     .comment("How rarely the towers will spawn (low: common, high: rare). Default: 35")
                     .defineInRange("towerRarity", 35, 10, 1000);
 
+            allModBiomesBlackList = builder
+                    .comment("A list of mod ids. In each and every biome added by those mods, the towers will not spawn. Default : The Midnight.")
+                    .define("allModBiomesBlackList",
+                            Lists.newArrayList(
+                                "midnight"
+                            ));
+
             biomeBlackList = builder
-                    .comment("A list of biomes where the towers do not spawn. Default: Oceans, Rivers, Beaches, Nether, End.")
+                    .comment("A list of biomes where the towers will not spawn. Default: Oceans, Rivers, Beaches, Nether, End.")
                     .define("biomeBlackList",
                             Lists.newArrayList(
                                 "minecraft:ocean",
