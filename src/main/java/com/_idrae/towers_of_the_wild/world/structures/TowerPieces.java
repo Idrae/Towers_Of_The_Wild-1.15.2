@@ -1,6 +1,7 @@
 package com._idrae.towers_of_the_wild.world.structures;
 
 import com._idrae.towers_of_the_wild.TowersOfTheWild;
+import com._idrae.towers_of_the_wild.config.TowersOfTheWildConfig;
 import com._idrae.towers_of_the_wild.util.RegistryHandler;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.BlockState;
@@ -36,9 +37,9 @@ import java.util.Random;
 public class TowerPieces {
 
     // private static final ResourceLocation TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
-    private static final ResourceLocation TOWER_TOP = ModList.get().isLoaded("waystones") ? new ResourceLocation(TowersOfTheWild.MOD_ID, "waystone_tower_top") : new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
+    private static final ResourceLocation TOWER_TOP = ModList.get().isLoaded("waystones") && TowersOfTheWildConfig.waystonesCompat ? new ResourceLocation(TowersOfTheWild.MOD_ID, "waystone_tower_top") : new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_top");
     private static final ResourceLocation TOWER_BOTTOM = new ResourceLocation(TowersOfTheWild.MOD_ID, "tower_bottom");
-    
+
     private static final ResourceLocation TOWER_CHEST = new ResourceLocation(TowersOfTheWild.MOD_ID, "chests/tower_chest");
     private static final Map<ResourceLocation, BlockPos> CENTER_TOP_OFFSETS = ImmutableMap.of(TOWER_TOP, new BlockPos(6, 28, 6), TOWER_BOTTOM, new BlockPos(3, 31, 3));
     private static final Map<ResourceLocation, BlockPos> CORNER_RELATIVE_POSITIONS = ImmutableMap.of(TOWER_TOP, new BlockPos(-3, 31, -3), TOWER_BOTTOM, BlockPos.ZERO);

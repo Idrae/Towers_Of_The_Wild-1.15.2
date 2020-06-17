@@ -1,6 +1,7 @@
 package com._idrae.towers_of_the_wild.world.structures;
 
 import com._idrae.towers_of_the_wild.TowersOfTheWild;
+import com._idrae.towers_of_the_wild.config.TowersOfTheWildConfig;
 import com._idrae.towers_of_the_wild.util.RegistryHandler;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.BlockState;
@@ -23,6 +24,7 @@ import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,7 @@ import java.util.Random;
 
 public class DerelictTowerPieces {
 
-    private static final ResourceLocation DERELICT_TOWER_TOP = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_top");
+    private static final ResourceLocation DERELICT_TOWER_TOP = ModList.get().isLoaded("waystones") && TowersOfTheWildConfig.waystonesCompat ? new ResourceLocation(TowersOfTheWild.MOD_ID, "waystone_derelict_tower_top") : new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_top");
     private static final ResourceLocation DERELICT_TOWER_BOTTOM = new ResourceLocation(TowersOfTheWild.MOD_ID, "derelict_tower_bottom");
 
     private static final ResourceLocation TOWER_CHEST = new ResourceLocation(TowersOfTheWild.MOD_ID, "chests/tower_chest");

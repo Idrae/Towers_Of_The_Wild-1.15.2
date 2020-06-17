@@ -22,6 +22,7 @@ public class TowersOfTheWildConfig {
     public static List<String> allModBiomesBlackList;
     public static List<String> biomeBlackList;
     public static int derelictTowerProportion;
+    public static boolean waystonesCompat;
 
 
     static {
@@ -43,6 +44,7 @@ public class TowersOfTheWildConfig {
         allModBiomesBlackList = COMMON.allModBiomesBlackList.get();
         biomeBlackList = COMMON.biomeBlackList.get();
         derelictTowerProportion = COMMON.derelictTowerProportion.get();
+        waystonesCompat = COMMON.waystonesCompat.get();
     }
 
     public static class CommonConfig {
@@ -51,6 +53,7 @@ public class TowersOfTheWildConfig {
         public final ForgeConfigSpec.ConfigValue<List<String>> allModBiomesBlackList;
         public final ForgeConfigSpec.ConfigValue<List<String>> biomeBlackList;
         public final ForgeConfigSpec.IntValue derelictTowerProportion;
+        public final ForgeConfigSpec.BooleanValue waystonesCompat;
 
         public CommonConfig(ForgeConfigSpec.Builder builder) {
             builder.push("towers");
@@ -101,6 +104,10 @@ public class TowersOfTheWildConfig {
             derelictTowerProportion = builder
                     .comment("The proportion of towers that will be derelict (in %). Default: 15")
                     .defineInRange("derelictTowerProportion", 15, 0, 100);
+
+            waystonesCompat = builder
+                    .comment("If the Waytones mod is installed and this is set to true, towers will spawn with a waystone at the top. If the Waystone mod is not installed, this will have no effect. Default: true")
+                    .define("waystonesCompat", true);
 
             builder.pop();
         }
