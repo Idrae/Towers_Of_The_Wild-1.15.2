@@ -8,6 +8,7 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.OverworldDimension;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.IglooPieces;
@@ -33,6 +34,7 @@ public class WorldInit {
     }
 
     private static void addSurfaceStructure(Biome biome, Structure<NoFeatureConfig> structure) {
+
         biome.addStructure(structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
         biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
     }

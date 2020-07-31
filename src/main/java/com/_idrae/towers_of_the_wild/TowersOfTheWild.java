@@ -3,6 +3,10 @@ package com._idrae.towers_of_the_wild;
 import com._idrae.towers_of_the_wild.config.TowersOfTheWildConfig;
 import com._idrae.towers_of_the_wild.util.RegistryHandler;
 import com._idrae.towers_of_the_wild.world.WorldInit;
+import com.sun.xml.internal.fastinfoset.sax.Features;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -29,6 +33,7 @@ public class TowersOfTheWild {
         modEventBus.addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
     }
+
 
     private void setup(final FMLCommonSetupEvent event) {
         WorldInit.setup();
